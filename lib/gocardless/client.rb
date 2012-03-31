@@ -30,8 +30,8 @@ module GoCardless
 
     def initialize(args = {})
       Utils.symbolize_keys! args
-      @app_id = args[:app_id]
-      @app_secret = args[:app_secret]
+      @app_id = args[:app_id] ||= GoCardless.account_details[:app_id]
+      @app_secret = args[:app_secret] ||= GoCardless.account_details[:app_secret]
       raise ClientError.new("You must provide an app_id") unless @app_id
       raise ClientError.new("You must provide an app_secret") unless @app_secret
 
